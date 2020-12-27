@@ -52,5 +52,28 @@ footer {
   grid-area: footer;
   background-color: #333;
   color: white;
+}
 
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main {
+  flex: 3 60rem;
+}
+
+.sidebar {
+  flex: 1 20rem;
+}
+
+/*********** PRODUCTS *************/
+
+.products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding : 0;
+  margin: 0;
+  list-style-type: none;
 }
