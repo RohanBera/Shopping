@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Products from './components/Products'
+import Filter from './components/Filter'
 import data from "./data.json"
 
 class App extends Component {
@@ -12,6 +13,24 @@ class App extends Component {
 		}
 	}
 
+	filterProducts = (event) => {
+		const productSize = event.target.value
+	
+		console.log(productSize)
+		if (productSize === "") {
+			this.setState({ 
+				size: productSize, 
+				products: data.products
+			})
+		}
+		else {
+			this.setState({ 
+				size: productSize, 
+				products: data.products.filter(product => product.availableSizes.indexOf(productSize) >= 0)
+			})
+		}
+	}
+
 	render() {
 		return (
 			<div className="grid-container">
@@ -21,6 +40,12 @@ class App extends Component {
 				<main>
 					<div className="content">
 						<div className="main">
+							<Filter count={this.state.products.length} 
+								size={this.state.size}
+								// sort={this.state.sort}
+								filterProducts={this.filterProducts}
+								// sortProducts={this.sortProducts}
+							/>
 							<Products products={this.state.products} />
 						</div>
 						<div className="sidebar">
@@ -28,7 +53,6 @@ class App extends Component {
 						</div>	
 					</div>
 				</main>
-				
 				<footer>
 					All rights reserved.
 				</footer>

@@ -138,3 +138,16 @@ footer {
   background-color: #ffc000;
 }
 
+/************* Filter  ***************/
+
+.filter {
+  display: flex;
+  padding: 1rem;
+  margin: 1rem;
+  justify-content: space-around;
+  border-bottom: 1px solid #ccc
+}
+
+.filter div {
+  flex: 1;
+}
