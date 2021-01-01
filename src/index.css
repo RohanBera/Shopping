@@ -207,3 +207,30 @@ footer {
   flex: 1;
   max-width: 15rem;
 }
+
+/******** Submit Form *******8*****/
+
+form {
+  width: 100%;
+}
+
+.form-container {
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+input:hover {
+  border: 1px solid #333
+}

@@ -64,6 +64,10 @@ class App extends Component {
 		}
 	}
 
+	placeOrder = (order) => {
+		alert("Your order : " + order)
+	}
+
 	render() {
 		return (
 			<div className="grid-container">
@@ -88,6 +92,7 @@ class App extends Component {
 							<Cart 
 								cartItems={this.state.cartItems} 
 								removeFromCart={this.removeFromCart}	
+								placeOrder={this.placeOrder}
 							/>
 						</div>	
 					</div>

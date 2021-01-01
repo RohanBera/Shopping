@@ -1,6 +1,36 @@
 import React, { Component } from 'react'
 
 export default class Cart extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: "",
+            email: "",
+            address: "",
+            showCheckout: false,
+        }
+    }
+
+    handleChange = (event) => {
+        var { name, value } = event.target
+        this.setState({
+            [name]: value,
+        })
+    }
+
+    placeOrder = (event) => {
+        event.preventDefault()
+
+        const order = {
+            name: this.state.name,
+            email: this.state.email,
+            address: this.state.address,
+            cartItem: this.props.cartItems,
+        }
+
+        this.props.placeOrder(order);
+    }
+
     render() {
         const { cartItems } = this.props
         return (
@@ -30,15 +60,55 @@ export default class Cart extends Component {
                     </ul>
                 </div>
                 {cartItems.length !==0 && (
-                    <div className="cart">
-                        <div className="total">
-                            {"Total : \u20B9  " + cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
-                            <button className="button primary">
-                            Proceed
-                            </button>
+                    <>  
+                        <div className="cart"> 
+                            <div className="total">
+                                {"Total : \u20B9  " + cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
+                                <button className="button primary" onClick={()=> this.setState({showCheckout: true})}>
+                                Proceed
+                                </button>
+                            </div>
                         </div>
-                        
-                    </div>
+
+                        {this.state.showCheckout && (
+                            <div className="cart">
+                                <form onSubmit={this.placeOrder}>
+                                    <ul className="form-container">
+                                        <li>
+                                            <lable>Name</lable>
+                                            <input 
+                                                name="name" 
+                                                type="text"
+                                                required
+                                                onChange={this.handleChange}
+                                            />
+                                        </li>
+                                        <li>
+                                            <lable>Email</lable>
+                                            <input 
+                                                name="email"
+                                                type="email"
+                                                required
+                                                onChange={this.handleChange}
+                                            />
+                                        </li>
+                                        <li>
+                                            <lable>Address</lable>
+                                            <input 
+                                                name="address"
+                                                type="text"
+                                                required
+                                                onChange={this.handleChange}
+                                            />
+                                        </li>
+                                        <li>
+                                            <button className="button primary" type="submit">Checkout</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        )} 
+                    </>
                 )}
             </div>
         )
