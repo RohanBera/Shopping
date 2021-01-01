@@ -33,10 +33,11 @@ export default class Cart extends Component {
                     <div className="cart">
                         <div className="total">
                             {"Total : \u20B9  " + cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
-                        </div>
-                        <button className="button primary">
+                            <button className="button primary">
                             Proceed
-                        </button>
+                            </button>
+                        </div>
+                        
                     </div>
                 )}
             </div>

@@ -158,7 +158,7 @@ footer {
   padding: 1.2rem;
   margin: 1rem;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .cart-header {
@@ -194,13 +194,16 @@ footer {
 .total {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
 .total > div {
+  flex: 1;
   font-size: 2rem;
 }
 
-.total > div, .total > button {
+.total > button {
   flex: 1;
+  max-width: 15rem;
 }
