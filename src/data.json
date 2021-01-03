@@ -10,7 +10,7 @@
                 "L",
                 "XL"
             ],
-            "price": 299
+            "price": 759
         },
         {
             "_id": "dress2",
@@ -21,7 +21,7 @@
                 "S",
                 "XXL"
             ],
-            "price": 299
+            "price": 699
         },
         {
             "_id": "dress3",
@@ -33,7 +33,7 @@
                 "L",
                 "XXL"
             ],
-            "price": 299
+            "price": 599
         },
         {
             "_id": "dress4",
@@ -57,7 +57,7 @@
                 "XL",
                 "XXL"
             ],
-            "price": 299
+            "price": 249
         },
         {
             "_id": "dress6",
@@ -69,7 +69,7 @@
                 "L",
                 "XL"
             ],
-            "price": 299
+            "price": 349
         },
         {
             "_id": "dress10",

@@ -10,9 +10,10 @@ Shopping website (React, redux, mongoDB)
 - - [x] Same item multiple times
 - - [x] Total 
 - - [x] Persistent (used local storage)
-- [ ] Place order
+- [ ] Create Server
+- [x] Place order
 - - [ ] Backend
-- [ ] Checkout form
+- [x] Checkout form
 - - [ ] Backend 
-- [ ] Product info
+- [x] Product info
 - [ ] Host website?
