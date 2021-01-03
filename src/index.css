@@ -234,3 +234,30 @@ input {
 input:hover {
   border: 1px solid #333
 }
+
+/*********** Product details ************/
+
+.product-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 96vh;
+}
+
+.product-details img {
+  max-height: 100vh;
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.product-details-description {
+  flex: 1 1;
+  margin: 10px;
+}
+
+.close-product-details {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  z-index: 999;
+}
