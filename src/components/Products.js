@@ -58,6 +58,7 @@ export default class Products extends Component {
                     <Modal 
                         isOpen
                         onRequestClose={this.closeProductDetails}
+                        ariaHideApp={false}
                     >
                         <Zoom>
                             <div>
@@ -65,7 +66,9 @@ export default class Products extends Component {
                                     x
                                 </button>
                                 <div className="product-details">
-                                    <img src={product.image} alt={product.title} />
+                                    <div className="img">
+                                        <img src={product.image} alt={product.title} />
+                                    </div>
                                     <div className="product-details-description">
                                         <p>
                                             <strong>{product.title}</strong>
@@ -76,7 +79,7 @@ export default class Products extends Component {
                                         <p>
                                             Available sizes: {"  "}
                                             {product.availableSizes.map(size => (
-                                                <span>
+                                                <span key={size}>
                                                     {" "}
                                                     <button className="button">{size}</button>
                                                 </span>

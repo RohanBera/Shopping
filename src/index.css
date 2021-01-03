@@ -98,13 +98,21 @@ footer {
   height: 100%;
 }
 
+.product a {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .product a:hover {
   color: #aa0000;
 }
 
 .products img {
+  /* align-self: center; */
+  margin: 0 auto;
   max-width: 37rem;
-  max-height: 37rem;
+  height: 37rem;
 }
 
 .product-price {
@@ -244,10 +252,27 @@ input:hover {
   max-height: 96vh;
 }
 
-.product-details img {
+.product-details .img {
+  display: flex;
+  justify-content: center;
   max-height: 100vh;
-  max-width: 45rem;
+  width: 40rem;
   margin: 0 auto;
+}
+
+.product-details .img img {
+  height: 45rem;
+}
+
+@media screen and (max-width: 480px) {
+  .product-details .img {
+    width: 100vw;
+  }
+
+  .product-details .img img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .product-details-description {
