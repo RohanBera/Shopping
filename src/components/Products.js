@@ -37,9 +37,7 @@ export default class Products extends Component {
                                         onClick={() => this.productDetails(product)}
                                     > 
                                         <img src={product.image} alt={product.title} />
-                                        <p>
-                                            {product.title}
-                                        </p>
+                                        <p>{product.title}</p>
                                     </a>
                                     <div className="product-price">
                                         <div>

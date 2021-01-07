@@ -49,7 +49,7 @@ export default class Cart extends Component {
                                     <img src={cartItem.image} alt={cartItem.title} />
                                 </div>
                                 <div>
-                                    <div>{cartItem.title}</div>
+                                    {/* <div>{cartItem.title}</div> */}
                                     <div className="right">
                                         {"\u20B9  "+ cartItem.price} x {cartItem.count + "  "} 
                                         <button className="button" onClick={() => this.props.removeFromCart(cartItem)}>

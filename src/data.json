@@ -10,6 +10,8 @@
                 "L",
                 "XL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 759
         },
         {
@@ -21,6 +23,8 @@
                 "S",
                 "XXL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 699
         },
         {
@@ -33,6 +37,8 @@
                 "L",
                 "XXL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 599
         },
         {
@@ -45,6 +51,8 @@
                 "L",
                 "XL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 299
         },
         {
@@ -57,6 +65,8 @@
                 "XL",
                 "XXL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 249
         },
         {
@@ -69,6 +79,8 @@
                 "L",
                 "XL"
             ],
+            "gender": "male",
+            "department": "shirt",
             "price": 349
         },
         {
@@ -82,6 +94,8 @@
                 "XL",
                 "XXL"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 299
         },
         {
@@ -94,6 +108,8 @@
                 "M",
                 "L"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 389
         },
         {
@@ -106,6 +122,8 @@
                 "M",
                 "L"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 549
         },
         {
@@ -116,6 +134,8 @@
             "availableSizes": [
                 "XL"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 259
         },
         {
@@ -128,6 +148,8 @@
                 "L",
                 "XL"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 899
         },
         {
@@ -139,6 +161,8 @@
                 "XL",
                 "XXL"
             ],
+            "gender": "female",
+            "department": "dress",
             "price": 499
         }
     ]
