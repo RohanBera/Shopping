@@ -11,10 +11,25 @@ class App extends Component {
 		super(props)
 		this.state = {
 			products: data.products, 
-			search: "",			
-			size: "",
-			sort: "", 
-			gender: "",
+			search: "",
+			categories: {
+				department: {
+					shirt: false,
+					dress: false,
+					shoes: false,
+				},			
+				size: {
+					S: false,
+					M: false,
+					L: false,
+					XL: false,
+					XXL: false,
+				},
+				gender: {
+					male: false,
+					female: false,
+				},
+			},
 			cartItems: JSON.parse(localStorage.getItem('cartItems')) ? JSON.parse(localStorage.getItem('cartItems')) : []
 		}
 	}
@@ -50,40 +65,59 @@ class App extends Component {
 		localStorage.setItem('cartItems', JSON.stringify(updatedItems))
 	}
 
-	filterProductsSize = (event) => {
-		const productSize = event.target.value
+	// filterProductsSize = (event) => {
+	// 	const productSize = event.target.value
 	
-		console.log(productSize)
-		if (productSize === "") {
-			this.setState({ 
-				size: productSize, 
-				products: data.products,
-			})
-		}
-		else {
-			this.setState({ 
-				size: productSize, 
-				products: data.products.filter(product => product.availableSizes.indexOf(productSize) >= 0)
-			})
-		}
-	}
+	// 	console.log(productSize)
+	// 	if (productSize === "") {
+	// 		this.setState({ 
+	// 			size: productSize, 
+	// 			products: data.products,
+	// 		})
+	// 	}
+	// 	else {
+	// 		this.setState({ 
+	// 			size: productSize, 
+	// 			products: data.products.filter(product => product.availableSizes.indexOf(productSize) >= 0)
+	// 		})
+	// 	}
+	// }
 
-	filterProductsGender = (event) => {
-		const productGender = event.target.value
+	// filterProductsGender = (event) => {
+	// 	const productGender = event.target.value
 	
-		console.log(productGender)
-		if (productGender === "") {
-			this.setState({ 
-				gender: productGender, 
-				products: data.products
-			})
-		}
-		else {
-			this.setState({ 
-				gender: productGender, 
-				products: data.products.filter(product => product.gender === productGender)
-			})
-		}
+	// 	console.log(productGender)
+	// 	if (productGender === "") {
+	// 		this.setState({ 
+	// 			gender: productGender, 
+	// 			products: data.products
+	// 		})
+	// 	}
+	// 	else {
+	// 		this.setState({ 
+	// 			gender: productGender, 
+	// 			products: data.products.filter(product => product.gender === productGender)
+	// 		})
+	// 	}
+	// }
+
+	handleCheckboxFilter = (event) => {
+		var categoryName = event.target.name
+		var categoryItem = event.target.value
+		var { checked } = event.target
+		console.log(categoryName, categoryItem, checked) 
+
+		this.setState(prevState => ({ 
+			categories: {
+				...prevState.categories,
+				[categoryName] : {
+					...prevState.categories[categoryName],
+					[categoryItem] : checked,
+				}
+			}
+		}), function () {
+			console.log(this.state.categories)
+		})
 	}
 
 	searchProducts = (searchedProduct) => {
@@ -118,10 +152,13 @@ class App extends Component {
 						<div className="filter-bar">
 							<FilterCategories 
 								products={data.products}
+								categories={this.state.categories}
+								handleCheckboxFilter={this.handleCheckboxFilter}
 							/>
 						</div>
 						<div className="main">
-							<Filter count={this.state.products.length} 
+							<Filter 
+								count={this.state.products.length} 
 								size={this.state.size}
 								filterProductsSize={this.filterProductsSize}
 

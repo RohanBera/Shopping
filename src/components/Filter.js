@@ -7,15 +7,8 @@ export default class Filter extends Component {
                 <div className="filter-result">
                     {this.props.count}  Products
                 </div>
-                {/* <div className="filter-sort">
-                    Order {"  "}
-                    <select value={this.props.sort} onChange={this.props.sortProducts}>
-                        <option >Latest</option>
-                        <option value="lowest">lowest</option>
-                        <option value="highest">highest</option>
-                    </select>
-                </div> */}
-                <div className="filter-gender">
+
+                {/* <div className="filter-gender">
                     Gender {"  "}
                     <select value={this.props.gender} onChange={this.props.filterProductsGender}>
                         <option value="">ALL</option>
@@ -23,6 +16,7 @@ export default class Filter extends Component {
                         <option value="female">Female</option>
                     </select>
                 </div>
+                
                 <div className="filter-size">
                     Filter {"  "}
                     <select value={this.props.size} onChange={this.props.filterProductsSize}>
@@ -34,7 +28,7 @@ export default class Filter extends Component {
                         <option value="XL">XL</option>
                         <option value="XXL">XXL</option>
                     </select>
-                </div>
+                </div> */}
             </div>
 
         )

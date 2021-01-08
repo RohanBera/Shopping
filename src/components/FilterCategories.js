@@ -3,52 +3,26 @@ import React, { Component } from 'react'
 export default class FilterCategories extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            categories : {
-                department: [],
-                gender: ["male", "female"],
-                size: [
-                    "S",
-                    "M",
-                    "L",
-                    "XL",
-                    "XXL"
-                ],
-            }
-        }
-    }
-
-    componentDidMount () {
-
-        // checking all products for available categories
-        // can we do this for size too????
-
-        var departments = this.state.categories.department
-
-        this.props.products.forEach(product => {
-            if(!departments.includes(product.department)) {
-                departments.push(product.department)
-            }
-        })
-
-        this.setState(prevState => ({
-            categories: {
-                ...prevState.categories,
-                department: departments
-            } 
-        }))
+        this.state = {}
     }
 
     render() {
         return (
             <div>
-                {Object.keys(this.state.categories).map((categoryItem, index) => (
-                    <div>
-                        <p>{categoryItem}</p>
-                        <ul key={index}>
-                            {this.state.categories[categoryItem].map((subItem, index) => (
-                                <li key={index}>    
-                                    <p>{subItem}</p>
+                {Object.keys(this.props.categories).map((categoryName, index) => (
+                    <div key={index}>
+                        <p>{categoryName}</p>
+                        <ul>
+                            {Object.keys(this.props.categories[categoryName]).map((categoryItem, index) => (
+                                <li key={categoryItem + index}>    
+                                    <input 
+                                        type="checkbox" 
+                                        name={categoryName} 
+                                        value={categoryItem} 
+                                        checked={this.props.categories[categoryName][categoryItem]} 
+                                        onChange={this.props.handleCheckboxFilter} 
+                                    />
+                                    <span>{categoryItem}</span>
                                 </li>
                             ))}
                         </ul>
