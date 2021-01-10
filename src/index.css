@@ -71,6 +71,7 @@ footer {
 
 .filter-bar {
   flex: 1 15rem;
+  border-right: 1px solid #ccc;
 }
 
 .main {
@@ -155,24 +156,17 @@ footer {
   background-color: #ffc000;
 }
 
-/************* Filter  ***************/
-
-.filter {
+.product-count {
   display: flex;
   padding: 1rem;
   margin: 1rem;
-  justify-content: space-around;
   border-bottom: 1px solid #ccc
-}
-
-.filter div {
-  flex: 1;
 }
 
 /************ Cart  *******************/
 
 .cart {
-  padding: 1.2rem;
+  padding: 1rem;
   margin: 1rem;
   display: flex;
   /* flex-wrap: wrap; */
@@ -328,4 +322,38 @@ input:hover {
 
 .search-bar > input:focus, .search-bar > button:focus {
   outline: none;
+}
+
+/*********** filter-bar ************/
+
+.filter {
+  padding: 5rem 1rem;
+  margin: 1rem;
+  width: 100%;
+}
+
+.filter .filter-header {
+  padding-bottom: 1px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.filter .filter-items {
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+
+.filter .filter-items li {
+  padding: 3px 2px;
+  font-size: 1.4rem;
+}
+
+.filter .filter-items li label:hover {
+  color: #9b7912;
+  cursor: pointer;
+}
+
+.filter .filter-items li label input:hover {
+  cursor: pointer;
 }
