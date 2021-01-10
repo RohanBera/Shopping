@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Products from './components/Products'
-import Filter from './components/Filter'
 import Cart from './components/Cart'
 import SearchBar from './components/SearchBar'
 import FilterCategories from './components/FilterCategories'
@@ -101,6 +100,31 @@ class App extends Component {
 	// 	}
 	// }
 
+	filterProducts = () => {
+		var products   = data.products
+		var categories = this.state.categories
+
+		Object.keys(categories).forEach(categoryName => {
+			var categoryItems = []
+			Object.keys(categories[categoryName]).forEach(categoryItem => {
+				if (categories[categoryName][categoryItem]) {
+					categoryItems.push(categoryItem)
+				}
+			})
+
+			console.log(categoryItems)
+			if (categoryItems.length > 0) {
+				products = products.filter(product => 
+					product.categories[categoryName].filter(item => categoryItems.includes(item)).length > 0 
+				)
+			}
+		})
+
+		this.setState({
+			products: products
+		})
+	}
+
 	handleCheckboxFilter = (event) => {
 		var categoryName = event.target.name
 		var categoryItem = event.target.value
@@ -116,7 +140,8 @@ class App extends Component {
 				}
 			}
 		}), function () {
-			console.log(this.state.categories)
+			// console.log(this.state.categories)
+			this.filterProducts()
 		})
 	}
 
@@ -157,14 +182,9 @@ class App extends Component {
 							/>
 						</div>
 						<div className="main">
-							<Filter 
-								count={this.state.products.length} 
-								size={this.state.size}
-								filterProductsSize={this.filterProductsSize}
-
-								gender={this.props.gender}
-								filterProductsGender={this.filterProductsGender}
-							/>
+							<div className="product-count">
+								{this.state.products.length}  Products
+							</div>
 							<Products 
 								products={this.state.products} 
 								addToCart={this.addToCart}	

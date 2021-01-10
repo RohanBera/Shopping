@@ -8,21 +8,22 @@ export default class FilterCategories extends Component {
 
     render() {
         return (
-            <div>
+            <div className="filter">
                 {Object.keys(this.props.categories).map((categoryName, index) => (
                     <div key={index}>
-                        <p>{categoryName}</p>
-                        <ul>
+                        <p className="filter-header">{categoryName}</p>
+                        <ul className="filter-items">
                             {Object.keys(this.props.categories[categoryName]).map((categoryItem, index) => (
-                                <li key={categoryItem + index}>    
-                                    <input 
-                                        type="checkbox" 
-                                        name={categoryName} 
-                                        value={categoryItem} 
-                                        checked={this.props.categories[categoryName][categoryItem]} 
-                                        onChange={this.props.handleCheckboxFilter} 
-                                    />
-                                    <span>{categoryItem}</span>
+                                <li key={categoryItem + index}> 
+                                    <label>   
+                                        <input 
+                                            type="checkbox" 
+                                            name={categoryName} 
+                                            value={categoryItem} 
+                                            checked={this.props.categories[categoryName][categoryItem]} 
+                                            onChange={this.props.handleCheckboxFilter} 
+                                        />
+                                    {categoryItem}</label>
                                 </li>
                             ))}
                         </ul>
