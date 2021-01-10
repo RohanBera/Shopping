@@ -76,7 +76,7 @@ export default class Products extends Component {
                                         </p>
                                         <p>
                                             Available sizes: {"  "}
-                                            {product.availableSizes.map(size => (
+                                            {product.categories.size.map(size => (
                                                 <span key={size}>
                                                     {" "}
                                                     <button className="button">{size}</button>
