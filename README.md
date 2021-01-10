@@ -12,11 +12,11 @@ Shopping website (React, redux, mongoDB)
 - - [x] Total 
 - - [x] Persistent (used local storage)
 
-- [ ] Sort
+- [x] Filter
 - - [x] Size
-- - [ ] Type (Shirt, tshirt etc)
+- - [x] Type (Shirt, tshirt etc)
 - - [x] Gender
-- - [ ] Remove drop downs, add checkboxes 
+- - [x] Remove drop downs, add checkboxes 
 
 - [ ] Create Server
 
