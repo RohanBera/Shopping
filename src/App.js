@@ -1,210 +1,41 @@
 import React, { Component } from 'react'
-import Products from './components/Products'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from './Home'
 import Cart from './components/Cart'
 import SearchBar from './components/SearchBar'
-import FilterCategories from './components/FilterCategories'
-import data from "./data.json"
 
-class App extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			products: data.products, 
-			search: "",
-			categories: {
-				department: {
-					shirt: false,
-					dress: false,
-					shoes: false,
-				},			
-				size: {
-					S: false,
-					M: false,
-					L: false,
-					XL: false,
-					XXL: false,
-				},
-				gender: {
-					male: false,
-					female: false,
-				},
-			},
-			cartItems: JSON.parse(localStorage.getItem('cartItems')) ? JSON.parse(localStorage.getItem('cartItems')) : []
-		}
-	}
+export default class App extends Component {
+    render() {
+        return (
+            <div className="grid-container">
+                <header >
+                    <a href="/">Bmazon</a> 
+                    <SearchBar 
+                        searchProducts={this.searchProducts}
+                    />
+                </header>
 
-	addToCart = (product) => {
-		const cartItems = this.state.cartItems.slice()
-		let alreadyInCart = false
-
-		cartItems.forEach((cartItem) => {
-			if(cartItem._id === product._id) {
-				cartItem.count++
-				alreadyInCart = true
-			}
-		})
-
-		if (!alreadyInCart) {
-			cartItems.push({...product, count: 1})
-		}
-
-		this.setState({
-			cartItems: cartItems
-		})
-
-		localStorage.setItem('cartItems', JSON.stringify(cartItems))
-	}
-
-	removeFromCart = (product) => {
-		const cartItems = this.state.cartItems.slice()
-		const updatedItems = cartItems.filter(item => item._id !== product._id)
-		this.setState({
-			cartItems : updatedItems, 
-		})
-		localStorage.setItem('cartItems', JSON.stringify(updatedItems))
-	}
-
-	// filterProductsSize = (event) => {
-	// 	const productSize = event.target.value
-	
-	// 	console.log(productSize)
-	// 	if (productSize === "") {
-	// 		this.setState({ 
-	// 			size: productSize, 
-	// 			products: data.products,
-	// 		})
-	// 	}
-	// 	else {
-	// 		this.setState({ 
-	// 			size: productSize, 
-	// 			products: data.products.filter(product => product.availableSizes.indexOf(productSize) >= 0)
-	// 		})
-	// 	}
-	// }
-
-	// filterProductsGender = (event) => {
-	// 	const productGender = event.target.value
-	
-	// 	console.log(productGender)
-	// 	if (productGender === "") {
-	// 		this.setState({ 
-	// 			gender: productGender, 
-	// 			products: data.products
-	// 		})
-	// 	}
-	// 	else {
-	// 		this.setState({ 
-	// 			gender: productGender, 
-	// 			products: data.products.filter(product => product.gender === productGender)
-	// 		})
-	// 	}
-	// }
-
-	filterProducts = () => {
-		var products   = data.products
-		var categories = this.state.categories
-
-		Object.keys(categories).forEach(categoryName => {
-			var categoryItems = []
-			Object.keys(categories[categoryName]).forEach(categoryItem => {
-				if (categories[categoryName][categoryItem]) {
-					categoryItems.push(categoryItem)
-				}
-			})
-
-			console.log(categoryItems)
-			if (categoryItems.length > 0) {
-				products = products.filter(product => 
-					product.categories[categoryName].filter(item => categoryItems.includes(item)).length > 0 
-				)
-			}
-		})
-
-		this.setState({
-			products: products
-		})
-	}
-
-	handleCheckboxFilter = (event) => {
-		var categoryName = event.target.name
-		var categoryItem = event.target.value
-		var { checked } = event.target
-		console.log(categoryName, categoryItem, checked) 
-
-		this.setState(prevState => ({ 
-			categories: {
-				...prevState.categories,
-				[categoryName] : {
-					...prevState.categories[categoryName],
-					[categoryItem] : checked,
-				}
-			}
-		}), function () {
-			// console.log(this.state.categories)
-			this.filterProducts()
-		})
-	}
-
-	searchProducts = (searchedProduct) => {
-		console.log(searchedProduct)
-		if (searchedProduct === "") {
-			this.setState({ 
-				products: data.products
-			})
-		}
-		else {
-			this.setState({ 
-				products: data.products.filter(product => product.title.toLowerCase().includes(searchedProduct.toLowerCase()))
-			})
-		}
-	}
-
-	placeOrder = (order) => {
-		alert("Your order : " + order)
-	}
-
-	render() {
-		return (
-			<div className="grid-container">
-				<header >
-					<a href="/">Bmazon</a> 
-					<SearchBar 
-						searchProducts={this.searchProducts}
-					/>
-				</header>
-				<main>
-					<div className="content">
-						<div className="filter-bar">
-							<FilterCategories 
-								products={data.products}
-								categories={this.state.categories}
-								handleCheckboxFilter={this.handleCheckboxFilter}
-							/>
-						</div>
-						<div className="main">
-							<div className="product-count">
-								{this.state.products.length}  Products
-							</div>
-							<Products 
-								products={this.state.products} 
-								addToCart={this.addToCart}	
-							/>
-						</div>
-						<div className="sidebar">
-							<Cart 
-								cartItems={this.state.cartItems} 
-								removeFromCart={this.removeFromCart}	
-								placeOrder={this.placeOrder}
-							/>
-						</div>	
-					</div>
-				</main>
-				<footer>
-					All rights reserved.
+                <main>
+                    <Router>
+                        <Switch>
+                            <Route 
+                                exact
+                                path="/"
+                                component={Home}
+                            />
+                            <Route 
+                                exact
+                                path="/cart"
+                                component={Cart}
+                            />
+                        </Switch>
+                    </Router>
+                </main>
+			
+                <footer>
+					Footer Footer Footer
 				</footer>
 			</div>
-		)
-	}
+        )
+    }
 }
-
-export default App;
