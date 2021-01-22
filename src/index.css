@@ -32,6 +32,7 @@ a {
 header {
   display: flex;
   align-items : center;
+  justify-content: space-between;
   grid-area: header;
   padding: 1.5rem;
   background-color: #333;
@@ -40,7 +41,6 @@ header {
 
 header a {
   color: white;
-  margin-right: 10rem;
   font-size: 2rem;
   font-weight: 900;
   text-decoration: none;
@@ -246,7 +246,7 @@ footer {
   padding: 2rem;
   width: 100%;
   list-style-type: none;
-  box-shadow: 0 0 3px #d1d1d1;
+  box-shadow: 1px 1px 7px #d1d1d1;
 }
 
 .main-cart .main-cart-total {
@@ -255,7 +255,7 @@ footer {
   padding: 2rem;
   width: 100%;
   height: fit-content;
-  box-shadow: 0 0 3px #d1d1d1;
+  box-shadow: 1px 1px 7px #d1d1d1;
 }
 
 .main-cart .main-cart-total .row{
@@ -310,7 +310,7 @@ form {
   padding: 10px;
 }
 
-input {
+input, textarea {
   padding: 10px;
   border: 1px solid #ccc;
 }
@@ -429,4 +429,60 @@ input:hover {
 
 .filter .filter-items li label input:hover {
   cursor: pointer;
+}
+
+/********** checkout **********/
+
+.checkout {
+  margin: auto;
+  padding: 1rem;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;  
+}
+
+.checkout .checkout-container {
+  flex: 2 50rem;
+  width: 100%;
+}
+
+.checkout .checkout-container .checkout-item {
+  margin: 1rem 1rem 3rem 1rem;
+  padding: 1rem;
+  box-shadow: 1px 1px 7px #d1d1d1;
+}
+
+.checkout .checkout-container .checkout-item .checkout-header{
+  padding: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333
+}
+
+.checkout .checkout-container .checkout-item .checkout-header span{
+  margin-right: 1rem;
+  padding: 2px 7px;
+  background-color: #ccc;
+}
+
+.checkout .checkout-container .checkout-item .checkout-body{
+  padding: 1rem;
+  padding-left: 45px;
+}
+
+.checkout .checkout-total {
+  flex: 1 15rem;
+  margin: 1rem;
+  padding: 2rem;
+  width: 100%;
+  height: fit-content;
+  box-shadow: 1px 1px 7px #d1d1d1;
+}
+
+.checkout .checkout-total .row{
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
