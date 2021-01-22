@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Home'
 import Cart from './components/Cart'
 import SearchBar from './components/SearchBar'
+import Checkout from './components/Checkout'
 
 export default class App extends Component {
     render() {
@@ -13,6 +14,7 @@ export default class App extends Component {
                     <SearchBar 
                         searchProducts={this.searchProducts}
                     />
+                    <a href="/cart">My Cart</a>
                 </header>
 
                 <main>
@@ -27,6 +29,11 @@ export default class App extends Component {
                                 exact
                                 path="/cart"
                                 component={Cart}
+                            />
+                            <Route 
+                                exact
+                                path="/checkout"
+                                component={Checkout}
                             />
                         </Switch>
                     </Router>
