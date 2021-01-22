@@ -52,7 +52,7 @@ export default class Cart extends Component {
                 {cartItems.length !==0 && (
                     <div className="main-cart-total">
                         <div className="row">
-                            <span>{"Price (" + cartItems.length + "items) : "}</span> 
+                            <span>{"Price (" + cartItems.length + " items) : "}</span> 
                             <span>{"\u20B9  " + total}</span>
                         </div>
                         <div className="row">
@@ -64,9 +64,11 @@ export default class Cart extends Component {
                             <span>{"\u20B9  " + (total + 120) }</span>
                         </div>
 
-                        <button className="button primary" onClick={()=> this.setState({showCheckout: true})}>
-                            Proceed
-                        </button>
+                        <a href="/checkout">
+                            <button className="button primary">
+                                    Place Order
+                            </button>
+                        </a>
                     </div>
                 )}
             </div>

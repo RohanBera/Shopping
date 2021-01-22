@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 
 export default class MiniCart extends Component {
@@ -63,57 +64,16 @@ export default class MiniCart extends Component {
                     </Fade>
                 </div>
                 {cartItems.length !==0 && (
-                    <>  
-                        <div className="cart"> 
-                            <div className="total">
-                                {"Total : \u20B9  " + cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
-                                <button className="button primary" onClick={()=> this.setState({showCheckout: true})}>
-                                    Proceed
+                    <div className="cart"> 
+                        <div className="total">
+                            {"Sub-Total : \u20B9  " + cartItems.reduce((total, item) => (total + item.price * item.count), 0)}
+                            <a href="/cart">
+                                <button className="button primary" >
+                                    View all Items
                                 </button>
-                            </div>
+                            </a>
                         </div>
-
-                        {this.state.showCheckout && (
-                                <Fade right cascade >
-                                <div className="cart">
-                                <form onSubmit={this.placeOrder}>
-                                    <ul className="form-container">
-                                        <li>
-                                            <lable>Name</lable>
-                                            <input 
-                                                name="name" 
-                                                type="text"
-                                                required
-                                                onChange={this.handleChange}
-                                            />
-                                        </li>
-                                        <li>
-                                            <lable>Email</lable>
-                                            <input 
-                                                name="email"
-                                                type="email"
-                                                required
-                                                onChange={this.handleChange}
-                                            />
-                                        </li>
-                                        <li>
-                                            <lable>Address</lable>
-                                            <input 
-                                                name="address"
-                                                type="text"
-                                                required
-                                                onChange={this.handleChange}
-                                            />
-                                        </li>
-                                        <li>
-                                            <button className="button primary" type="submit">Checkout</button>
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
-                            </Fade>
-                        )} 
-                    </>
+                    </div>
                 )}
             </div>
         )
