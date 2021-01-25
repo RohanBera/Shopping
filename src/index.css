@@ -32,7 +32,7 @@ a {
 header {
   display: flex;
   align-items : center;
-  justify-content: space-between;
+  justify-content: center;
   grid-area: header;
   padding: 1.5rem;
   background-color: #333;
@@ -41,6 +41,7 @@ header {
 
 header a {
   color: white;
+  margin: 0 2rem;
   font-size: 2rem;
   font-weight: 900;
   text-decoration: none;
@@ -235,6 +236,12 @@ footer {
   flex-wrap: wrap;  
 }
 
+@media screen and (max-width: 700px) {
+  .main-cart {
+    width: 95%;
+  }
+}
+
 .main-cart .main-cart-header {
   padding: 1rem 0;
   border-bottom: 1px solid #c1c1c1;
@@ -368,6 +375,7 @@ input:hover {
 
 .search-bar {
   display: flex;
+  margin: 0 2rem;
   align-items: center;
   width: 50vw;
 
@@ -442,6 +450,12 @@ input:hover {
   flex-wrap: wrap;  
 }
 
+@media screen and (max-width: 700px) {
+  .checkout {
+    width: 95%;
+  }
+}
+
 .checkout .checkout-container {
   flex: 2 50rem;
   width: 100%;
@@ -457,7 +471,7 @@ input:hover {
   padding: 1rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #333
+  color: #333;
 }
 
 .checkout .checkout-container .checkout-item .checkout-header span{
