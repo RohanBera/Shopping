@@ -122,10 +122,6 @@ class Home extends Component {
 		}
 	}
 
-	placeOrder = (order) => {
-		alert("Your order : " + order)
-	}
-
 	render() {
 		return (
 			<div className="content">
@@ -149,7 +145,6 @@ class Home extends Component {
 					<MiniCart 
 						cartItems={this.state.cartItems} 
 						removeFromCart={this.removeFromCart}	
-						placeOrder={this.placeOrder}
 					/>
 				</div>	
 			</div>
