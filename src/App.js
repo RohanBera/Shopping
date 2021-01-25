@@ -14,6 +14,7 @@ export default class App extends Component {
                     <SearchBar 
                         searchProducts={this.searchProducts}
                     />
+                    <a href="/">Rohan</a>
                     <a href="/cart">My Cart</a>
                 </header>
 
