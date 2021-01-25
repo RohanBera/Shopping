@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 
 export default class MiniCart extends Component {
@@ -18,19 +17,6 @@ export default class MiniCart extends Component {
         this.setState({
             [name]: value,
         })
-    }
-
-    placeOrder = (event) => {
-        event.preventDefault()
-
-        const order = {
-            name: this.state.name,
-            email: this.state.email,
-            address: this.state.address,
-            cartItem: this.props.cartItems,
-        }
-
-        this.props.placeOrder(order);
     }
 
     render() {
