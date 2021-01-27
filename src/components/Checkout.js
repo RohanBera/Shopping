@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
+import userData from '../user.json'
 
 export default class Checkout extends Component {
     constructor(props) {
         super(props)
         this.state={
-            userDetails: {
-                name: "",
-                email: "",
-                phno: "",
-                address: {
-                    pincode: "",
-                    locality: "",
-                    areaStreet: "",
-                    state: "",
-                    landmark: "",
-                    addrType: "",
-                },
-                payment: "",
+            userDetails: userData,
+            // true if no address and new address needed
+            // false if address there
+            newAddrDiv: userData.address.length <= 0,  
+            newAddr: {
+                id:"",
+                recipientName: "",
+                recipientPhno: "",
+                pincode: "",
+                areaStreet: "",
+                locality: "",
+                city: "",
+                state: "",
+                landmark: "",
+                addrType: ""
             },
             loginDiv: true,
             addressDiv: false,
@@ -27,9 +30,31 @@ export default class Checkout extends Component {
         }
     }
 
+    handleChange = (event) => {
+        var { name, value } = event.target
+
+        this.setState(prevState => ({
+            userDetails: {
+                ...prevState.userDetails,
+                [name] : value,
+            }
+        }))
+    }
+
+    handleNewAddressChange = (event) => {
+        var { name, value } = event.target
+
+        this.setState(prevState => ({
+            newAddr: {
+                ...prevState.newAddr,
+                [name] : value,
+            },
+        }))
+    }
+
     removeFromCart = (product) => {
 		const cartItems = this.state.cartItems.slice()
-		const updatedItems = cartItems.filter(item => item._id !== product._id)
+		const updatedItems = cartItems.filter(item => item.id !== product.id)
 		this.setState({
 			cartItems : updatedItems, 
 		})
@@ -43,6 +68,39 @@ export default class Checkout extends Component {
             loginDiv: false,
             addressDiv: true,
         })
+    }
+
+    toggleAddNewAddress = (event) => {
+        event.preventDefault()
+
+        this.setState(prevState => ({
+            newAddrDiv: !prevState.newAddrDiv,
+        }))
+    }
+
+    addNewAddress = (event) => {
+        this.setState(prevState => ({
+            newAddr: {
+                ...prevState.newAddr,
+                id: "address" + prevState.userDetails.address.length
+            }
+        }), function () {
+            console.log(this.state.newAddr)
+
+            this.setState(prevState => ({
+                userDetails: {
+                    ...prevState.userDetails,
+                    address: [
+                        ...prevState.userDetails.address,
+                        prevState.newAddr,
+                    ]
+                }
+            }))
+        })
+        
+
+
+        this.toggleAddNewAddress(event)
     }
 
     submitDeliveryAddress = (event) => {
@@ -63,30 +121,7 @@ export default class Checkout extends Component {
         })
     }
 
-    handleChange = (event) => {
-        var { name, value } = event.target
 
-        this.setState(prevState => ({
-            userDetails: {
-                ...prevState.userDetails,
-                [name] : value,
-            }
-        }))
-    }
-
-    handleAddressChange = (event) => {
-        var { name, value } = event.target
-
-        this.setState(prevState => ({
-            userDetails: {
-                ...prevState.userDetails,
-                address: {
-                    ...prevState.userDetails.address,
-                    [name] : value,
-                }
-            }
-        }))
-    }
 
     placeOrder = (event) => {
         event.preventDefault()
@@ -112,7 +147,7 @@ export default class Checkout extends Component {
                         </div>
 
                         {this.state.loginDiv && 
-                        <Fade collapse >
+                        <Fade >
                             <div className="checkout-body">
                                 <form onSubmit={this.submitUserDetails}>
                                     <ul className="form-container">
@@ -161,27 +196,69 @@ export default class Checkout extends Component {
                             <span>2</span> Delivery address
                         </div>
 
-                        {this.state.addressDiv && 
-                        <Fade collapse>
+                        {this.state.addressDiv &&
+                        <Fade>
                             <div className="checkout-body">
-                                <form onSubmit={this.submitDeliveryAddress}>
+                                {!this.state.newAddrDiv
+                                ?
+                                    <form onSubmit={this.submitDeliveryAddress}>
+                                        <ul className="form-container">
+                                            {this.state.userDetails.address.map(addr => (
+                                                <li key={addr.id}>
+                                                    <input 
+                                                        id={addr.id}
+                                                        name="bruh"
+                                                        type="radio" 
+                                                        // value="wallet"
+                                                        // checked={this.state.userDetails.payment === 'wallet'}
+                                                        required
+                                                        // onChange={this.handleChange}
+                                                    />
+                                                    <label htmlFor={addr.id}>
+                                                        {addr.recipientName + "  " + addr.addrType + "  " + addr.recipientPhno}
+                                                        <br />
+                                                        {addr.areaStreet + ", " + addr.locality + ", " + addr.city + ", " + addr.state + ", "}
+                                                        <b>{addr.pincode}</b>
+                                                    </label>
+                                                </li>
+                                            ))}
+                                            <li>
+                                                <button className="button primary" type="submit">Deliver here</button>
+                                                <button className="button primary" onClick={this.toggleAddNewAddress} type="button">Add new address</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                :
+                                    <form onSubmit={this.addNewAddress}>
                                     <ul className="form-container">
+                                        <li>
+                                            <label>Recipient Name</label>
+                                            <input 
+                                                name="recipientName" 
+                                                type="text"
+                                                required
+                                                value={this.state.newAddr.recipientName}
+                                                onChange={this.handleNewAddressChange}
+                                            />
+                                        </li>
+                                        <li>
+                                            <label>Recipient Phone number</label>
+                                            <input 
+                                                name="recipientPhno" 
+                                                type="text"
+                                                required
+                                                value={this.state.newAddr.recipientPhno}
+                                                onChange={this.handleNewAddressChange}
+                                            />
+                                        </li>
                                         <li>
                                             <label>Pincode</label>
                                             <input 
                                                 name="pincode" 
                                                 type="text"
                                                 required
-                                                onChange={this.handleAddressChange}
-                                            />
-                                        </li>
-                                        <li>
-                                            <label>Locality</label>
-                                            <input 
-                                                name="locality"
-                                                type="text"
-                                                required
-                                                onChange={this.handleAddressChange}
+                                                value={this.state.newAddr.pincode}
+                                                onChange={this.handleNewAddressChange}
                                             />
                                         </li>
                                         <li>
@@ -190,7 +267,18 @@ export default class Checkout extends Component {
                                                 name="areaStreet"
                                                 type="text"
                                                 required
-                                                onChange={this.handleAddressChange}
+                                                value={this.state.newAddr.areaStreet}
+                                                onChange={this.handleNewAddressChange}
+                                            />
+                                        </li>
+                                        <li>
+                                            <label>Locality</label>
+                                            <input 
+                                                name="locality"
+                                                type="text"
+                                                required
+                                                value={this.state.newAddr.locality}
+                                                onChange={this.handleNewAddressChange}
                                             />
                                         </li>
                                         <li>
@@ -199,7 +287,8 @@ export default class Checkout extends Component {
                                                 name="city"
                                                 type="text"
                                                 required
-                                                onChange={this.handleAddressChange}
+                                                value={this.state.newAddr.city}
+                                                onChange={this.handleNewAddressChange}
                                             />
                                         </li>
                                         <li>
@@ -208,7 +297,8 @@ export default class Checkout extends Component {
                                                 name="state"
                                                 type="text"
                                                 required
-                                                onChange={this.handleAddressChange}
+                                                value={this.state.newAddr.state}
+                                                onChange={this.handleNewAddressChange}
                                             />
                                         </li>
                                         <li>
@@ -217,7 +307,8 @@ export default class Checkout extends Component {
                                                 name="landmark"
                                                 type="text"
                                                 // required
-                                                onChange={this.handleAddressChange}
+                                                value={this.state.newAddr.landmark}
+                                                onChange={this.handleNewAddressChange}
                                             />
                                         </li>
                                         <li> 
@@ -228,9 +319,9 @@ export default class Checkout extends Component {
                                                 name="addrType"
                                                 type="radio"
                                                 value="home"
-                                                checked={this.state.userDetails.address.addrType === 'home'}
+                                                checked={this.state.newAddr.addrType === 'home'}
                                                 required
-                                                onChange={this.handleAddressChange}
+                                                onChange={this.handleNewAddressChange}
                                             /> Home (All day delivery)
                                             </label>
                                             <br />
@@ -239,17 +330,18 @@ export default class Checkout extends Component {
                                                 name="addrType"
                                                 type="radio"
                                                 value="work"
-                                                checked={this.state.userDetails.address.addrType === 'work'}
+                                                checked={this.state.newAddr.addrType === 'work'}
                                                 required
-                                                onChange={this.handleAddressChange}
+                                                onChange={this.handleNewAddressChange}
                                             /> Work (Mon - Fri between 10AM and 5PM)
                                             </label>
                                         </li>
                                         <li>
-                                            <button className="button primary" type="submit">Deliver here</button>
+                                            <button className="button primary" type="submit">Add address</button>
                                         </li>
                                     </ul>
                                 </form>
+                                }   
                             </div>
                         </Fade>
                         }
@@ -266,7 +358,7 @@ export default class Checkout extends Component {
                                 <ul className="main-cart-items">
                                     <div className="main-cart-header">({cartItems.length} items)</div>
                                     {cartItems.map(cartItem => (
-                                        <li key={cartItem._id}>
+                                        <li key={cartItem.id}>
                                             <div>
                                                 <img src={cartItem.image} alt={cartItem.title} />
                                             </div>
@@ -295,7 +387,7 @@ export default class Checkout extends Component {
                         </div>
 
                         {this.state.paymentDiv && 
-                        <Fade collapse>
+                        <Fade >
                             <div className="checkout-body">
                                 <form >
                                     <ul className="form-container">
