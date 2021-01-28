@@ -85,7 +85,6 @@ export default class Checkout extends Component {
                 id: "address" + prevState.userDetails.address.length
             }
         }), function () {
-            console.log(this.state.newAddr)
 
             this.setState(prevState => ({
                 userDetails: {
@@ -98,8 +97,6 @@ export default class Checkout extends Component {
             }))
         })
         
-
-
         this.toggleAddNewAddress(event)
     }
 
@@ -121,22 +118,27 @@ export default class Checkout extends Component {
         })
     }
 
-
-
     placeOrder = (event) => {
         event.preventDefault()
+        this.props.history.push('/orderSummary') 
 
-        const order = {
-            name: this.state.name,
-            email: this.state.email,
-            address: this.state.address,
-            cartItem: this.props.cartItems,
-        }
+        // const order = {
+        //     name: this.state.name,
+        //     email: this.state.email,
+        //     address: this.state.address,
+        //     cartItem: this.props.cartItems,
+        // }
     }
 
     render() {
-        const cartItems =  this.state.cartItems
-        var total = cartItems.reduce((total, item) => (total + item.price * item.count), 0)
+        var cartItems = []
+        if (this.state.cartItems.length === 0 ) {
+            alert("No items in cart to chekout!")
+            this.props.history.push('/') 
+        } else {
+            cartItems =  this.state.cartItems
+            var total = cartItems.reduce((total, item) => (total + item.price * item.count), 0)
+        }
 
         return (
             <div className="checkout">
@@ -204,7 +206,7 @@ export default class Checkout extends Component {
                                     <form onSubmit={this.submitDeliveryAddress}>
                                         <ul className="form-container">
                                             {this.state.userDetails.address.map(addr => (
-                                                <li key={addr.id}>
+                                                <li className="row left" key={addr.id}>
                                                     <input 
                                                         id={addr.id}
                                                         name="bruh"
@@ -214,7 +216,7 @@ export default class Checkout extends Component {
                                                         required
                                                         // onChange={this.handleChange}
                                                     />
-                                                    <label htmlFor={addr.id}>
+                                                    <label className="radio-label" htmlFor={addr.id}>
                                                         {addr.recipientName + "  " + addr.addrType + "  " + addr.recipientPhno}
                                                         <br />
                                                         {addr.areaStreet + ", " + addr.locality + ", " + addr.city + ", " + addr.state + ", "}
@@ -222,7 +224,7 @@ export default class Checkout extends Component {
                                                     </label>
                                                 </li>
                                             ))}
-                                            <li>
+                                            <li className="row">
                                                 <button className="button primary" type="submit">Deliver here</button>
                                                 <button className="button primary" onClick={this.toggleAddNewAddress} type="button">Add new address</button>
                                             </li>
@@ -314,7 +316,7 @@ export default class Checkout extends Component {
                                         <li> 
                                             <label>Address Type</label>
                                             <br />
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="addrType"
                                                 type="radio"
@@ -325,7 +327,7 @@ export default class Checkout extends Component {
                                             /> Home (All day delivery)
                                             </label>
                                             <br />
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="addrType"
                                                 type="radio"
@@ -336,8 +338,9 @@ export default class Checkout extends Component {
                                             /> Work (Mon - Fri between 10AM and 5PM)
                                             </label>
                                         </li>
-                                        <li>
+                                        <li className="row">
                                             <button className="button primary" type="submit">Add address</button>
+                                            <button className="button primary" onClick={this.toggleAddNewAddress} type="button">Back</button>
                                         </li>
                                     </ul>
                                 </form>
@@ -389,10 +392,10 @@ export default class Checkout extends Component {
                         {this.state.paymentDiv && 
                         <Fade >
                             <div className="checkout-body">
-                                <form >
+                                <form onSubmit={this.placeOrder}>
                                     <ul className="form-container">
                                         <li>
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="payment" 
                                                 type="radio"
@@ -404,7 +407,7 @@ export default class Checkout extends Component {
                                             UPI (PhonePe / Paytm / Google Pay)</label>
                                         </li>
                                         <li>
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="payment"
                                                 type="radio"
@@ -416,7 +419,7 @@ export default class Checkout extends Component {
                                             Wallets</label>
                                         </li>
                                         <li>
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="payment"
                                                 type="radio"
@@ -428,7 +431,7 @@ export default class Checkout extends Component {
                                             Credit / Debit / ATM Card</label>
                                         </li>
                                         <li>
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="payment"
                                                 type="radio"
@@ -440,7 +443,7 @@ export default class Checkout extends Component {
                                             Net Banking</label>
                                         </li>
                                         <li>
-                                            <label>
+                                            <label className="radio-label">
                                             <input 
                                                 name="payment"
                                                 type="radio"
