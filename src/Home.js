@@ -2,34 +2,36 @@ import React, { Component } from 'react'
 import Products from './components/Products'
 import MiniCart from './components/MiniCart'
 import FilterCategories from './components/FilterCategories'
-import data from "./data.json"
 
 class Home extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			products: data.products, 
+			products: props.products, 
 			search: "",
-			categories: {
-				department: {
-					shirt: false,
-					dress: false,
-					shoes: false,
-				},			
-				size: {
-					S: false,
-					M: false,
-					L: false,
-					XL: false,
-					XXL: false,
-				},
-				gender: {
-					male: false,
-					female: false,
-				},
-			},
+			categories: {},
 			cartItems: JSON.parse(localStorage.getItem('cartItems')) ? JSON.parse(localStorage.getItem('cartItems')) : []
 		}
+	}
+
+	componentDidMount() {
+		// creates filters dynamically based on products
+
+		this.state.products.forEach(product => {
+			Object.keys(product.categories).forEach(categoryName => {
+				product.categories[categoryName].forEach(categoryItem => {
+					this.setState(prevState => ({
+						categories: {
+							...prevState.categories,
+							[categoryName] : {
+								...prevState.categories[categoryName],
+								[categoryItem] : false,
+							}
+						}
+					}))
+				})
+			})
+		})
 	}
 
 	addToCart = (product) => {
@@ -64,7 +66,7 @@ class Home extends Component {
 	}
 
 	filterProducts = () => {
-		var products   = data.products
+		var products   = this.props.products
 		var categories = this.state.categories
 
 		Object.keys(categories).forEach(categoryName => {
@@ -75,7 +77,6 @@ class Home extends Component {
 				}
 			})
 
-			console.log(categoryItems)
 			if (categoryItems.length > 0) {
 				products = products.filter(product => 
 					product.categories[categoryName].filter(item => categoryItems.includes(item)).length > 0 
@@ -92,7 +93,6 @@ class Home extends Component {
 		var categoryName = event.target.name
 		var categoryItem = event.target.value
 		var { checked } = event.target
-		console.log(categoryName, categoryItem, checked) 
 
 		this.setState(prevState => ({ 
 			categories: {
@@ -103,23 +103,8 @@ class Home extends Component {
 				}
 			}
 		}), function () {
-			// console.log(this.state.categories)
 			this.filterProducts()
 		})
-	}
-
-	searchProducts = (searchedProduct) => {
-		console.log(searchedProduct)
-		if (searchedProduct === "") {
-			this.setState({ 
-				products: data.products
-			})
-		}
-		else {
-			this.setState({ 
-				products: data.products.filter(product => product.title.toLowerCase().includes(searchedProduct.toLowerCase()))
-			})
-		}
 	}
 
 	render() {
@@ -127,7 +112,7 @@ class Home extends Component {
 			<div className="content">
 				<div className="filter-bar">
 					<FilterCategories 
-						products={data.products}
+						products={this.props.products}
 						categories={this.state.categories}
 						handleCheckboxFilter={this.handleCheckboxFilter}
 					/>
