@@ -38,4 +38,6 @@ Nice Shopping website
 - [x] Place order
 - - [ ] Backend
 
+- [ ] Authentication 
+
 - [ ] Host website?
