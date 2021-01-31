@@ -32,6 +32,8 @@ Nice Shopping website
 
 ## Cart
 
+#### todo
+
 - [x] Mini Cart
 - - [x] Add to cart
 - - [x] Remove from cart
@@ -46,11 +48,15 @@ Nice Shopping website
 
 ## User Profile
 
+#### todo
+
 - [ ] Profile page
 - - [x] Dummy backend (json file)
 - - [ ] Actual backend?
 
 ## Checkout
+
+#### todo
 
 - [x] Checkout form
 - - [x] Dummy backend (json file)
@@ -60,6 +66,8 @@ Nice Shopping website
 - - [ ] Backend
 
 ## Misc
+
+#### todo
 
 - [ ] Create Server
 - [ ] Authentication 
