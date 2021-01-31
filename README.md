@@ -35,12 +35,14 @@ Nice Shopping website
 #### todo
 
 - [x] Mini Cart
+> Small bar, side of page
 - - [x] Add to cart
 - - [x] Remove from cart
 - - [x] Same item multiple times
 - - [x] Total 
 
 - [x] Cart
+> The actual cart 
 - - [x] Remove from cart
 - - [x] Same item multiple times
 - - [x] Total 
