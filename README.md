@@ -11,7 +11,7 @@ Nice Shopping website
 - - [ ] Offers! Deals! Shop by category 
 
 ## Product page
->> Search results, List of products 
+> Search results, List of products 
 
 #### todo
 
@@ -19,7 +19,7 @@ Nice Shopping website
 - - [x] Product info
 
 ## Filters
->> Filters dynamically generated based on searched products
+> Filters dynamically generated based on searched products
 
 #### todo
 
