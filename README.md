@@ -32,19 +32,25 @@ Nice Shopping website
 
 ## Cart
 
-- [x] Cart
-- - [x] Mini cart 
+- [x] Mini Cart
 - - [x] Add to cart
+- - [x] Remove from cart
+- - [x] Same item multiple times
+- - [x] Total 
+
+- [x] Cart
 - - [x] Remove from cart
 - - [x] Same item multiple times
 - - [x] Total 
 - - [x] Persistent (used local storage)
 
-- [ ] Create Server
+## User Profile
 
 - [ ] Profile page
 - - [x] Dummy backend (json file)
 - - [ ] Actual backend?
+
+## Checkout
 
 - [x] Checkout form
 - - [x] Dummy backend (json file)
@@ -53,6 +59,8 @@ Nice Shopping website
 - [x] Place order
 - - [ ] Backend
 
-- [ ] Authentication 
+## Misc
 
+- [ ] Create Server
+- [ ] Authentication 
 - [ ] Host website?
